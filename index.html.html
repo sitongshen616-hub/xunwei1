@@ -1,0 +1,210 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f5ddd5"><title>寻味 · 经典鸡尾酒</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f7e8dc;color:#731e3d;font-family:Georgia,'Songti SC',serif}main{position:relative;min-height:100svh;height:900px;max-width:620px;margin:auto;overflow:hidden;background:radial-gradient(ellipse at 61% 38%,#e8a3b9 0,#efbdc7 33%,#f7e8dc 70%)}#stage{position:absolute;inset:0;touch-action:pan-y}canvas{width:100%;height:100%;display:block}.home{position:absolute;top:max(24px,env(safe-area-inset-top));left:24px;border:0;background:none;color:inherit;padding:5px;z-index:2}.home svg{width:26px;height:26px}h1{font-size:clamp(36px,10vw,58px);font-weight:400;letter-spacing:-3px;margin:0}hgroup{position:absolute;top:48%;left:7%;pointer-events:none}hgroup p{font-size:12px;letter-spacing:5px;margin:8px 0}.recipe{position:absolute;right:6%;top:44%;font-size:12px;line-height:1.7;width:103px}.recipe b{font-size:16px;display:block;margin-top:10px}.details{position:absolute;left:7%;top:65%;width:67%;border:1px solid #8d4b59;background:#faeee4b8;backdrop-filter:blur(8px)}.details header{padding:10px 12px;border-bottom:1px solid #8d4b59;font-size:20px}.details p{font-size:13px;line-height:1.8;margin:0;padding:10px 12px}.details button{width:100%;text-align:left;border:0;border-top:1px solid #8d4b59;background:transparent;padding:13px;color:inherit;font:16px Georgia}.order{position:absolute;right:6%;bottom:8%;border:1px solid #731e3d;padding:14px 18px;background:#fbefe5e6;color:inherit;font:20px Georgia}.order:after{content:'';position:absolute;width:9px;height:9px;background:#b74955;border-radius:50%;right:-5px;top:-5px}.hint{position:absolute;top:25%;left:7%;font-size:9px;letter-spacing:2px;writing-mode:vertical-rl;opacity:.6}dialog{border:1px solid #9e6675;background:#fff3e9;color:#731e3d;padding:26px;max-width:85vw;width:360px}dialog::backdrop{background:#481a3455;backdrop-filter:blur(6px)}dialog p{line-height:1.9;font-size:14px}dialog button{background:none;border:1px solid #9e6675;padding:10px 14px;color:inherit;font:inherit}#status{font-size:12px}.foot{position:absolute;bottom:3%;left:7%;font-size:9px;letter-spacing:3px}@media(min-width:650px){main{height:100svh;min-height:850px}}@media(max-height:750px){main{height:820px}}
+.recipe{white-space:pre-line}.recipe small{font-size:9px;line-height:1.4;display:inline-block;margin-top:6px}dialog p{white-space:pre-line}#stage:focus-within{outline:none}main[aria-hidden="true"]{visibility:hidden}
+/* A two-column flow keeps the pairing card clear of both the recipe and order button. */
+main{height:auto;min-height:max(900px,100svh)}
+.detail-bottom{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 103px;gap:20px;align-items:end;margin:0 6% 0 7%;padding-top:max(585px,65svh);padding-bottom:92px;pointer-events:none}
+.detail-bottom .details{position:relative;left:auto;top:auto;width:100%;min-width:0;pointer-events:auto}
+.detail-bottom .order{position:relative;right:auto;bottom:auto;width:100%;min-width:0;margin:0;padding:14px 8px;font-size:18px;line-height:1.5;pointer-events:auto}
+.details header{font-size:18px;padding:10px}
+.details header small{display:block;font-size:8px!important;letter-spacing:1px;margin-top:4px}
+.details p{font-size:12px;line-height:1.75;padding:10px;overflow-wrap:anywhere}
+.details button{padding:12px 10px;min-height:44px;font-size:15px}
+@media(min-width:520px){.detail-bottom{grid-template-columns:minmax(0,1fr) 130px;gap:24px}.detail-bottom .order{font-size:20px}.details p{font-size:13px}}
+@media(max-width:360px){.detail-bottom{grid-template-columns:minmax(0,1fr) 96px;gap:14px}.recipe{width:96px}.details header{font-size:16px}.details p{font-size:11px}}
+
+/* Keep the rotating glass inside a dedicated upper-half display area. */
+#stage{inset:auto 0 auto;top:max(64px,calc(env(safe-area-inset-top) + 36px));height:clamp(330px,42svh,420px);box-sizing:content-box;padding-bottom:140px;overflow:hidden}
+.hint{top:18%;font-size:8px}
+</style></head><body><main><div id="stage" aria-label="可拖动旋转的三维玛格丽特酒杯"></div><button class="home" aria-label="返回酒单主页"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 14 16 4l12 10v14h-9v-9h-6v9H4Z"/></svg></button><div class="hint">DRAG TO ROTATE · 拖动旋转</div><hgroup><h1>玛格丽特</h1><p>MARGARITA</p></hgroup><aside class="recipe"><b>基酒</b>龙舌兰 / TEQUILA<b>调味</b>青柠汁<br>橙味利口酒<b>酒精度</b>≈ 24% vol<br><small>依实际配方而异</small></aside><div class="detail-bottom"><section class="details"><header>推荐搭配 <small style="font-size:9px">FOOD PAIRING</small></header><p>墨西哥玉米片 · 牛油果沙拉<br>炭烤鲜虾，唤醒清爽酸香。</p><button id="history">酒的历史 <span style="float:right"></span></button></section><button class="order" id="order">立即下单</button></div><div class="foot">寻味 / A TASTE TO REMEMBER</div></main><dialog id="modal"><h2 id="title"></h2><p id="content"></p><button id="close">关闭</button></dialog><script type="module">import * as THREE from 'https://esm.sh/three@0.170.0';
+import * as T from 'https://esm.sh/three@0.170.0';
+import {RoundedBoxGeometry} from 'https://esm.sh/three@0.170.0/examples/jsm/geometries/RoundedBoxGeometry.js';
+
+// All detail is native 3D geometry; small repeated elements use GPU instances.
+const sphere=new T.SphereGeometry(1,18,12),smallSphere=new T.SphereGeometry(1,7,5);
+const iceGeo=new RoundedBoxGeometry(.48,.45,.46,4,.065);
+const cache=new Map();
+function mat(color,roughness=.3){const key=color+':'+roughness;if(!cache.has(key))cache.set(key,new T.MeshPhysicalMaterial({color,roughness,clearcoat:.85,clearcoatRoughness:.12}));return cache.get(key)}
+const glass=new T.MeshPhysicalMaterial({color:'#fffaf4',roughness:.045,metalness:0,transparent:true,opacity:.22,side:T.DoubleSide,depthWrite:false,clearcoat:1,envMapIntensity:1.15});
+const edgeGlass=new T.MeshPhysicalMaterial({color:'#fffaf4',roughness:.05,transparent:true,opacity:.46,depthWrite:false,clearcoat:1,envMapIntensity:1.4});
+const iceMat=new T.MeshPhysicalMaterial({color:'#ecf8fa',transparent:true,opacity:.53,roughness:.09,metalness:.025,clearcoat:1,depthWrite:false,envMapIntensity:1.6});
+const frostMat=new T.MeshStandardMaterial({color:'#ffffff',transparent:true,opacity:.13,roughness:.7,depthWrite:false});
+const pith=mat('#f8f0c6',.58);
+function random(seed){let s=seed;return()=>{s=(s*16807)%2147483647;return(s-1)/2147483646}}
+function mesh(parent,geometry,material,position=[0,0,0]){const m=new T.Mesh(geometry,material);m.position.set(...position);parent.add(m);return m}
+function lathe(parent,points,material){return mesh(parent,new T.LatheGeometry(points.map(p=>new T.Vector2(...p)),128),material)}
+function glassRing(parent,r,y,material=edgeGlass,tube=.012){const m=mesh(parent,new T.TorusGeometry(r,tube,10,96),material,[0,y,0]);m.rotation.x=Math.PI/2;return m}
+function curves(parent,paths,color,opacity=1){const pts=[];for(const path of paths)for(let i=1;i<path.length;i++)pts.push(...path[i-1],...path[i]);const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pts,3));const obj=new T.LineSegments(geo,new T.LineBasicMaterial({color,transparent:opacity<1,opacity}));parent.add(obj);return obj}
+function tube(parent,points,r,color){const c=new T.CatmullRomCurve3(points.map(v=>new T.Vector3(...v)));return mesh(parent,new T.TubeGeometry(c,28,r,7,false),mat(color,.4))}
+function instances(parent,count,geo,material,place){const m=new T.InstancedMesh(geo,material,count),d=new T.Object3D();for(let i=0;i<count;i++){d.position.set(0,0,0);d.rotation.set(0,0,0);d.scale.set(1,1,1);place(d,i);d.updateMatrix();m.setMatrixAt(i,d.matrix)}m.instanceMatrix.needsUpdate=true;parent.add(m);return m}
+function peelGrain(){if(cache.has('peel-bump'))return cache.get('peel-bump');const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),rnd=random(41);x.fillStyle='#888';x.fillRect(0,0,128,128);for(let k=0;k<950;k++){x.fillStyle=k%3?'#737373':'#b0b0b0';x.beginPath();x.arc(rnd()*128,rnd()*128,.35+rnd()*.8,0,Math.PI*2);x.fill()}const tex=new T.CanvasTexture(c);tex.wrapS=tex.wrapT=T.RepeatWrapping;cache.set('peel-bump',tex);return tex}
+function citrus(parent,{x,y,z=0,r=.4,kind='lime',tilt=-.3}){const g=new T.Group();g.name=kind+' slice with pulp vesicles';parent.add(g);g.position.set(x,y,z);g.rotation.set(.06,-.12,tilt);const orange=kind==='orange',lemon=kind==='lemon';const peel=mat(orange?'#da8220':lemon?'#dbb82b':'#65842a',.47);peel.bumpMap=peelGrain();peel.bumpScale=.012;const shell=mesh(g,new T.CylinderGeometry(r,r,.09,80),peel);shell.rotation.x=Math.PI/2;const rnd=random(91);for(const side of [-1,1]){const m=mesh(g,new T.CircleGeometry(r*.95,80),pith,[0,0,side*.047]);if(side<0)m.rotation.y=Math.PI;const sectorMat=mat('#ffffff',.22).clone();sectorMat.side=T.DoubleSide;const sectors=instances(g,10,new T.CircleGeometry(r*.85,18,.024,Math.PI/5-.05),sectorMat,(d,k)=>{d.position.z=side*.05;d.rotation.z=k*Math.PI/5});for(let k=0;k<10;k++)sectors.setColorAt(k,new T.Color(orange?(k%2?'#f3b84f':'#efab36'):lemon?(k%2?'#f4df84':'#e9d16c'):(k%2?'#d5df81':'#c8d36b')));sectors.instanceColor.needsUpdate=true;instances(g,230,smallSphere,mat(orange?'#ffcf7e':lemon?'#fff0ac':'#f0eaa4',.18),(d,k)=>{const a=k*2.399963,rad=r*.82*Math.sqrt((k+.4)/230);d.position.set(Math.cos(a)*rad,Math.sin(a)*rad,side*(.054+rnd()*.008));d.rotation.z=a-Math.PI/2;d.scale.set(r*(.014+rnd()*.013),r*(.048+rnd()*.04),.006)});mesh(g,new T.CircleGeometry(r*.05,12),pith,[0,0,side*.061])}instances(g,220,smallSphere,mat(orange?'#b66b22':lemon?'#b89c24':'#40631d',.65),(d,k)=>{const a=k*2.399963;d.position.set(Math.cos(a)*(r+.001),Math.sin(a)*(r+.001),(rnd()-.5)*.078);d.scale.setScalar(.0025+rnd()*.0025)});return g}
+function ice(parent,positions,size=1){const rnd=random(713);positions.forEach((pos,i)=>{const g=new T.Group();g.position.set(...pos);g.rotation.set((rnd()-.5)*.35,rnd()*Math.PI,(rnd()-.5)*.5);g.scale.setScalar(size);g.name='rounded clear ice with internal fissures';parent.add(g);mesh(g,iceGeo,iceMat);const core=mesh(g,sphere,frostMat);core.scale.set(.1,.13,.085);curves(g,[[[-.18,.226,-.14],[-.05,.227,-.03],[.02,.227,-.07],[.16,.226,.12]],[[-.05,.227,-.03],[-.1,.227,.13]],[[-.23,-.1,.12],[-.234,.03,.04],[-.233,.15,.11]]],'#f4ffff',.6);instances(g,9,smallSphere,frostMat,d=>{d.position.set((rnd()-.5)*.28,(rnd()-.5)*.3,(rnd()-.5)*.25);d.scale.setScalar(.009+rnd()*.009)})})}
+function crushedIce(parent,count,r,bottom,top){const rnd=random(123);instances(parent,count,iceGeo,iceMat,d=>{const a=rnd()*Math.PI*2,rad=Math.sqrt(rnd())*r;d.position.set(Math.cos(a)*rad,bottom+rnd()*(top-bottom),Math.sin(a)*rad);d.rotation.set(rnd()*3,rnd()*3,rnd()*3);const s=.24+rnd()*.38;d.scale.set(s,s*(.65+rnd()*.6),s)}).name='irregular crushed ice'}
+function bubbles(parent,r,bottom,top,count=55){const rnd=random(97);instances(parent,count,smallSphere,new T.MeshPhysicalMaterial({color:'#fff8e0',transparent:true,opacity:.45,roughness:.08,depthWrite:false}),d=>{const a=rnd()*Math.PI*2,rad=r*Math.sqrt(rnd());d.position.set(Math.cos(a)*rad,bottom+rnd()*(top-bottom),Math.sin(a)*rad);d.scale.setScalar(.004+rnd()*.008)})}
+function dew(parent,profile,count=85){const rnd=random(71),valid=profile.filter(p=>p[0]>.3);instances(parent,count,smallSphere,new T.MeshPhysicalMaterial({color:'#f5ffff',transparent:true,opacity:.32,roughness:.06,clearcoat:1,depthWrite:false}),d=>{const k=Math.floor(rnd()*(valid.length-1)),a=valid[k],b=valid[k+1],t=rnd(),r=a[0]+(b[0]-a[0])*t+.009,y=a[1]+(b[1]-a[1])*t,angle=rnd()*Math.PI*2;d.position.set(Math.cos(angle)*r,y,Math.sin(angle)*r);const s=.006+rnd()*.012;d.scale.set(s,s*(1+rnd()*.7),s*.65);d.rotation.y=-angle})}
+function mint(parent,pos,angle=0,size=1){const g=new T.Group();g.position.set(...pos);g.rotation.set(-.4,angle,.2);g.scale.setScalar(size);g.name='mint leaf with veins';parent.add(g);const vertices=[],indices=[];for(let j=0;j<=18;j++){const t=j/18,w=Math.sin(t*Math.PI)*.15*(1+.055*Math.cos(t*28*Math.PI));for(const u of [-1,0,1])vertices.push(u*w,t*.48,Math.sin(t*Math.PI)*.035+(1-Math.abs(u))*.012)}for(let j=0;j<18;j++)for(let k=0;k<2;k++){const a=j*3+k;indices.push(a,a+1,a+3,a+1,a+4,a+3)}const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geo.setIndex(indices);geo.computeVertexNormals();const leafmat=mat('#4a792c',.62).clone();leafmat.side=T.DoubleSide;mesh(g,geo,leafmat);const paths=[[[0,0,.013],[0,.24,.048],[0,.48,.013]]];for(let j=2;j<15;j+=2){let t=j/18,w=Math.sin(t*Math.PI)*.13;for(const side of [-1,1])paths.push([[0,t*.48,Math.sin(t*Math.PI)*.035+.014],[side*w,(t+.1)*.48,Math.sin((t+.1)*Math.PI)*.035+.005]])}curves(g,paths,'#9eb461',.65);return g}
+function cherry(parent,x,y,z,r=.14){const c=mesh(parent,sphere,mat('#681426',.1),[x,y,z]);c.name='glossy cocktail cherry';c.scale.set(r,r*.94,r);const dimple=mesh(parent,new T.TorusGeometry(r*.16,.009,8,20),mat('#471326',.2),[x,y+r*.92,z]);dimple.rotation.x=Math.PI/2;tube(parent,[[x,y+r*.92,z],[x+.04,y+r+.13,z-.015],[x+.13,y+r+.25,z-.04]],.009,'#5b512d');return c}
+function peelRibbon(parent,points,color,width=.07){const vertices=[],indices=[];for(const [x,y,z]of points)vertices.push(x,y-width,z,x,y+width,z);for(let i=0;i<points.length-1;i++){const a=i*2;indices.push(a,a+1,a+2,a+1,a+3,a+2)}const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geo.setIndex(indices);geo.computeVertexNormals();const skin=mat(color,.4).clone();skin.side=T.FrontSide;skin.bumpMap=peelGrain();skin.bumpScale=.008;mesh(parent,geo,skin);const back=mat('#efe3b0',.7).clone();back.side=T.BackSide;mesh(parent,geo,back);return geo}
+function foam(parent,r,y,count=240){const rnd=random(128);lathe(parent,[[0,y-.04],[r*.97,y-.04],[r,y],[r*.98,y+.035],[0,y+.04]],mat('#fff3dc',.8));instances(parent,count,smallSphere,mat('#fff8e9',.68),d=>{const a=rnd()*Math.PI*2,rad=r*Math.sqrt(rnd()),s=.008+rnd()*.017;d.position.set(Math.cos(a)*rad,y+.035,Math.sin(a)*rad);d.scale.set(s,s*.35,s)})}
+function pineapple(parent){const g=new T.Group();g.name='pineapple wedge with rind and fibres';g.position.set(-.53,1.45,0);g.rotation.z=.23;parent.add(g);const shape=new T.Shape();shape.moveTo(-.08,0);shape.lineTo(-.08,.72);shape.quadraticCurveTo(.18,.78,.57,.36);shape.closePath();const flesh=mat('#e9c35c',.48);mesh(g,new T.ExtrudeGeometry(shape,{depth:.11,bevelEnabled:true,bevelSize:.015,bevelThickness:.015,bevelSegments:3,steps:1}),flesh);const paths=[];for(let k=0;k<17;k++){const t=k/17;paths.push([[-.055,.035+t*.64,.13],[.07+t*.25,.13+t*.38,.13],[.14+t*.33,.22+t*.22,.13]])}curves(g,paths,'#f7dd92',.65);peelRibbon(g,Array.from({length:28},(_,k)=>{const t=k/27;return[-.08+t*.65,.72-t*.36,0]}),'#a7a048',.045);instances(g,32,smallSphere,mat('#8c832f',.65),(d,k)=>{const t=k/31;d.position.set(-.08+t*.65,.72-t*.36,.02+(k%2)*.055);d.scale.set(.016,.022,.012);d.rotation.z=-.5});for(let k=0;k<3;k++){const leaf=mint(g,[-.07,.66,.02],.1+k*.7,.55);leaf.rotation.z=-.7+k*.5}return g}
+
+function cocktailModel(i){const g=new T.Group();g.userData.index=i;const color=['#efd37b','#d8dfa0','#aa331e','#ae6b24','#e7dfbc','#ded69b','#81301e','#cc5274','#d6a64e','#efdfac'][i];const liquid=new T.MeshPhysicalMaterial({color,roughness:i===9?.32:.11,transparent:i!==9,opacity:i===4?.36:i===5?.69:.83,clearcoat:1,depthWrite:false,envMapIntensity:.65});
+let profile,fill,r,top;
+if(i===0){r=1.64;top=1.47;profile=[[0,-2.8],[.65,-2.8],[1.05,-2.75],[1.1,-2.7],[1.05,-2.65],[.7,-2.6],[.16,-2.48],[.09,-2.28],[.07,-.6],[.1,-.47],[.2,-.34],[.4,-.2],[.56,-.02],[.7,.15],[1.05,.5],[1.36,.95],[1.57,1.3],[r,top]];fill=[[0,-.26],[.3,-.16],[.59,.08],[.99,.53],[1.43,1.2],[0,1.2]]}
+else if(i===1){r=.64;top=1.4;profile=[[0,-1.6],[.49,-1.6],[.57,-1.57],[.6,-1.51],[.61,-1.34],[.62,.4],[r,top]];fill=[[0,-1.4],[.53,-1.4],[.57,1.16],[0,1.16]]}
+else if(i===2||i===3){r=i===2?.85:.79;top=.55;profile=[[0,-1.25],[r-.1,-1.25],[r-.03,-1.22],[r,-1.14],[r+.01,-.85],[r+.025,top]];fill=[[0,-1.04],[r-.08,-1.04],[r-.06,.36],[0,.36]]}
+else if(i===4||i===7){r=i===4?1.24:1.12;top=1.12;profile=[[0,-1.9],[.6,-1.9],[.75,-1.87],[.77,-1.83],[.64,-1.79],[.14,-1.69],[.06,-1.56],[.055,-.59],[.1,-.48],[r,top]];fill=[[0,-.43],[.1,-.39],[r*.87,.92],[0,.92]]}
+else if(i===5||i===6){r=i===5?1.03:.9;top=.93;profile=[[0,-1.9],[.57,-1.9],[.69,-1.86],[.7,-1.82],[.56,-1.78],[.12,-1.65],[.055,-1.51],[.055,-.45],[.18,-.31],[.38,-.22],[.58,-.08],[.82,.14],[r,.38],[r+.035,.68],[r,top]];fill=[[0,-.22],[.29,-.16],[.57,.02],[r-.06,.4],[r-.05,.74],[0,.74]]}
+else if(i===8){r=.74;top=.95;profile=[[0,-1.6],[.48,-1.6],[.62,-1.57],[.65,-1.52],[.5,-1.47],[.1,-1.39],[.07,-1.08],[.2,-.94],[.38,-.77],[.56,-.5],[.67,-.2],[.74,.3],[r,top]];fill=[[0,-.75],[.3,-.66],[.57,-.22],[.66,.43],[.66,.73],[0,.73]]}
+else{r=.7;top=1.5;profile=[[0,-1.9],[.51,-1.9],[.65,-1.87],[.68,-1.82],[.49,-1.77],[.13,-1.63],[.09,-1.08],[.27,-.94],[.49,-.77],[.69,-.52],[.78,-.25],[.79,.05],[.72,.42],[.63,.82],[.62,1.12],[.66,1.35],[r,top]];fill=[[0,-.72],[.39,-.68],[.68,-.3],[.69,.15],[.54,.83],[.56,1.25],[0,1.25]]}
+g.userData.glassProfile={profile:profile.map(p=>[...p]),rimRadius:r,lipY:top};
+// Include a separate inner wall and a rounded lip; the base remains closed.
+lathe(g,profile,glass);const wall=profile.slice(i===1||i===2||i===3?3:Math.max(3,profile.findIndex(p=>p[1]>=-.5))).map(([x,y])=>[Math.max(.01,x-.022),y]);if(wall.length>1)lathe(g,wall,glass);glassRing(g,r,top,edgeGlass,.014);
+const fy=fill.at(-1)[1],fr=fill.at(-2)[0];lathe(g,fill,liquid);const surface=mesh(g,new T.CircleGeometry(fr,96),liquid,[0,fy+.002,0]);surface.rotation.x=-Math.PI/2;glassRing(g,fr,fy,edgeGlass,.006);
+const base=profile[1][1];glassRing(g,profile[2][0]*.95,base+.035,edgeGlass,.014);if(![4,5,6,7].includes(i))dew(g,profile,65);
+if(i===0){g.name='Margarita — salt rim, lime pulp and clear ice';ice(g,[[-.7,1.2,.18],[-.12,1.24,.61],[.47,1.23,.25],[.81,1.2,-.28],[.12,1.24,-.55],[-.49,1.23,-.37]],1.06);citrus(g,{x:-1.23,y:1.61,r:.56,tilt:-.35});const rnd=random(51);instances(g,330,new T.OctahedronGeometry(1,0),mat('#fff5e8',.64),(d,k)=>{const a=k*2.399963,rr=r+(rnd()-.5)*.07;d.position.set(Math.cos(a)*rr,top+.01+rnd()*.035,Math.sin(a)*rr);const s=.013+rnd()*.023;d.scale.set(s,s*.8,s*.7);d.rotation.set(rnd()*3,rnd()*3,rnd()*3)});bubbles(g,.42,-.05,.63,85)}
+if(i===1){g.name='Mojito — crushed ice, lime wedges and veined mint';crushedIce(g,75,.44,-1.13,1.31);citrus(g,{x:.48,y:1.34,r:.34});for(let k=0;k<5;k++)mint(g,[Math.sin(k*2.4)*.16,1.22+(k%2)*.12,Math.cos(k*2.4)*.17],k*1.6,.85+(k%2)*.2);tube(g,[[0,1.16,0],[.04,1.5,.02],[.12,1.74,.03]],.012,'#6a873a');for(let k=0;k<4;k++){const piece=citrus(g,{x:Math.sin(k*2.6)*.29,y:-1.1+k*.5,z:Math.cos(k*2.6)*.25,r:.19,tilt:k});piece.rotation.y=k*.8;mint(g,[Math.sin(k)*.37,-.8+k*.45,.13],k,.55)}bubbles(g,.52,-1.2,1.14,100)}
+if(i===2){g.name='Negroni — ruby liquid, orange wheel and clear ice';ice(g,[[-.33,.16,.23],[.25,.19,.17],[.09,.21,-.3]],1.18);citrus(g,{x:.64,y:.62,r:.43,kind:'orange',tilt:.55});glassRing(g,.79,-1.1,edgeGlass,.025)}
+if(i===3){g.name='Old Fashioned — single ice block, orange peel and cut glass';ice(g,[[0,-.03,0]],1.85);peelRibbon(g,Array.from({length:60},(_,k)=>{const a=k*.1;return[Math.cos(a)*.5,.52+k*.0016,Math.sin(a)*.5]}),'#e29628',.085);const cuts=[];for(let k=0;k<18;k++){const a=k*Math.PI/9;cuts.push([[Math.cos(a)*.791,-1.1,Math.sin(a)*.791],[Math.cos(a)*.805,-.1,Math.sin(a)*.805],[Math.cos(a)*.814,.45,Math.sin(a)*.814]])}curves(g,cuts,'#ffefda',.32);glassRing(g,.73,-1.18,edgeGlass,.025)}
+if(i===4){g.name='Dry Martini — crystal V glass and pimento olives';tube(g,[[-.72,1.17,-.1],[.1,1.09,.1],[.84,1.02,.27]],.008,'#a28d61');for(let k=0;k<2;k++){const olive=mesh(g,sphere,mat('#80923f',.28),[-.26+k*.39,1.12-k*.035,.01+k*.1]);olive.scale.set(.18,.124,.12);olive.rotation.z=-.08;const hollow=mesh(olive,sphere,mat('#455827',.5),[.89,0,.18]);hollow.scale.set(.17,.43,.44);const pepper=mesh(olive,sphere,mat('#b85c38',.3),[.96,0,.18]);pepper.scale.set(.1,.3,.3)}}
+if(i===5){g.name='Daiquiri — pale lime silk, fine meniscus and lime twist';peelRibbon(g,Array.from({length:45},(_,k)=>[.63+Math.sin(k*.16)*.14,.96-k*.009,Math.cos(k*.16)*.14]),'#99a33f',.027);bubbles(g,.85,.735,.745,40)}
+if(i===6){g.name='Manhattan — amber-red liquid, rounded coupe and cherry';cherry(g,.33,.79,.2,.16);glassRing(g,.82,.74,edgeGlass,.006)}
+if(i===7){g.name='Cosmopolitan — cranberry pink, fine stem and orange twist';peelRibbon(g,Array.from({length:50},(_,k)=>[.65+Math.sin(k*.17)*.17,1.13-k*.006,Math.cos(k*.17)*.17]),'#e08e2b',.042)}
+if(i===8){g.name='Whiskey Sour — microbubble foam, lemon and glossy cherry';foam(g,.65,.78,330);citrus(g,{x:.54,y:.91,r:.3,kind:'lemon',tilt:.25});cherry(g,.24,.87,.25,.12)}
+if(i===9){g.name='Pina Colada — creamy coconut, pineapple fibres and hurricane glass';pineapple(g);foam(g,.55,1.25,190);cherry(g,.46,1.48,.07,.125);const straw=mesh(g,new T.CylinderGeometry(.025,.025,1.9,16),mat('#a25970',.55),[.3,1.35,-.15]);straw.rotation.z=-.14}
+return g}
+
+function studioEnvironment(renderer,scene){const c=document.createElement('canvas');c.width=512;c.height=256;const x=c.getContext('2d'),gr=x.createLinearGradient(0,0,512,0);gr.addColorStop(0,'#55444d');gr.addColorStop(.17,'#8f8181');gr.addColorStop(.2,'#fff8ed');gr.addColorStop(.27,'#756975');gr.addColorStop(.57,'#b5aba7');gr.addColorStop(.65,'#eee4d8');gr.addColorStop(1,'#66515f');x.fillStyle=gr;x.fillRect(0,0,512,256);x.fillStyle='#fffaf5';x.fillRect(65,12,24,225);x.fillRect(330,32,11,190);const tex=new T.CanvasTexture(c);tex.mapping=T.EquirectangularReflectionMapping;const pmrem=new T.PMREMGenerator(renderer);scene.environment=pmrem.fromEquirectangular(tex).texture;tex.dispose();pmrem.dispose()}
+
+// The displayed strength is an estimate after dilution, not a laboratory value.
+const drinkPages=[
+{id:'margarita',name:'玛格丽特',english:'Margarita',base:'龙舌兰',seasoning:'青柠汁 · 橙味利口酒',abv:'≈ 24%',pairing:'墨西哥玉米片 · 牛油果沙拉\n炭烤鲜虾，衬托青柠的明亮酸香。',formula:'龙舌兰 50 ml、橙味利口酒 20 ml、青柠汁 15 ml。',story:'龙舌兰、橙味利口酒与青柠汁，让这杯经典鸡尾酒拥有明亮的酸甜与盐边。关于玛格丽特的诞生，有多种流传的说法，确切的发明者与年份仍有争议。如今，它已成为龙舌兰鸡尾酒中极具代表性的一杯。'},
+{id:'mojito',name:'莫吉托',english:'Mojito',base:'白朗姆',seasoning:'青柠 · 薄荷\n糖 · 苏打水',abv:'≈ 10%',pairing:'香烤鸡肉 · 柑橘海鲜沙拉\n薄荷与气泡带来轻盈、清新的收尾。',formula:'白朗姆 45 ml、青柠汁 20 ml、白砂糖 2 茶匙、薄荷 6 枝，苏打水补足。',story:'莫吉托与古巴的饮酒文化紧密相连。朗姆、青柠、薄荷、糖与苏打，组成一杯清爽的长饮。关于它更早的雏形，有不同的民间叙述；与其认定唯一的起源，不如将它看作古巴朗姆与新鲜草本共同演变出的经典。'},
+{id:'negroni',name:'尼格罗尼',english:'Negroni',base:'金酒',seasoning:'金巴利\n甜味美思',abv:'≈ 24%',pairing:'熟成奶酪 · 橄榄 · 意式火腿\n咸香小食呼应浓郁的草本苦甜。',formula:'金酒 30 ml、金巴利 30 ml、甜味美思 30 ml，冰块搅拌，橙片装饰。',story:'尼格罗尼来自意大利的开胃酒传统。广为流传的说法是，它由美式鸡尾酒演变而来，以金酒替代苏打水，形成更浓郁的结构。金酒、金巴利与甜味美思的等份组合，让草本、苦味与甜香彼此平衡。'},
+{id:'old-fashioned',name:'古典',english:'Old Fashioned',base:'波本威士忌',seasoning:'方糖\n芳香苦精 · 橙皮',abv:'≈ 30%',pairing:'炭烤牛排 · 烟熏坚果\n焦香与橙皮香衬托威士忌的醇厚。',formula:'波本或黑麦威士忌 45 ml、方糖 1 块、芳香苦精数滴、少量水。',story:'古典鸡尾酒保留了早期鸡尾酒的基本结构：烈酒、糖、水与苦精。当调酒的变化越来越多，人们开始用“老式的方式”来称呼这种朴素的组合。它的魅力来自对威士忌本身的呈现，橙皮则为木质与香草气息添上明亮的一笔。'},
+{id:'dry-martini',name:'干马天尼',english:'Dry Martini',base:'金酒',seasoning:'干味美思\n橄榄',abv:'≈ 30%',pairing:'生蚝 · 橄榄 · 柠檬烤鱼\n海鲜的鲜味映衬干爽草本香。',formula:'金酒 60 ml、干味美思 10 ml，加冰搅拌后滤入冷却酒杯。',story:'马天尼在美国鸡尾酒文化中逐渐成形，它与马丁内兹等早期酒款的关系常被讨论，起源并没有单一结论。随时代变化，配方逐渐走向更干爽、以金酒为主的风格。橄榄与柠檬皮，是它最常见的两种装饰方向。'},
+{id:'daiquiri',name:'代基里',english:'Daiquiri',base:'白朗姆',seasoning:'青柠汁\n白砂糖',abv:'≈ 20%',pairing:'烤虾 · 炸鱼 · 青柠鸡肉\n清澈酸甜与酥脆口感相互映衬。',formula:'白朗姆 60 ml、青柠汁 20 ml、细白砂糖 2 茶匙，摇和滤入冷杯。',story:'代基里的名字与古巴同名地区相连。白朗姆、青柠与糖构成简洁的酸酒结构，后来也发展出冰沙、水果等许多变体。这里展示的是经典的滤冰版本：没有繁复装饰，让朗姆的香气与青柠的酸度直接相遇。'},
+{id:'manhattan',name:'曼哈顿',english:'Manhattan',base:'黑麦威士忌',seasoning:'甜味美思\n芳香苦精',abv:'≈ 27%',pairing:'烟熏鸭胸 · 熟成奶酪\n浓郁咸香呼应甜香料与木质气息。',formula:'黑麦威士忌 50 ml、甜味美思 20 ml、芳香苦精 1 dash，搅拌后以鸡尾酒樱桃装饰。',story:'曼哈顿与十九世纪的纽约酒吧文化相连。有关它具体诞生场景的故事不少，其中部分传说存在争议。威士忌、甜味美思与苦精形成它稳定的骨架，黑麦威士忌的辛香与酒渍樱桃的甜香，让这杯短饮显得沉稳而馥郁。'},
+{id:'cosmopolitan',name:'大都会',english:'Cosmopolitan',base:'柑橘伏特加',seasoning:'橙味利口酒\n蔓越莓 · 青柠',abv:'≈ 20%',pairing:'烟熏三文鱼 · 莓果奶酪\n轻盈果酸与柔润咸香相互平衡。',formula:'柑橘伏特加 40 ml、橙味利口酒 15 ml、青柠汁 15 ml、蔓越莓汁 30 ml。',story:'大都会在二十世纪后期逐渐走红，粉红色酒液和利落的高脚杯成为它鲜明的视觉标记。它的现代配方由不同调酒师不断演进，难以用一个故事概括。伏特加作为基底，橙酒、青柠与蔓越莓则带来清晰的酸甜层次。'},
+{id:'whiskey-sour',name:'威士忌酸',english:'Whiskey Sour',base:'波本威士忌',seasoning:'柠檬汁 · 糖浆\n蛋白（可选）',abv:'≈ 20%',pairing:'炸鸡 · 烤猪肋排\n柠檬酸香让酥脆与丰腴更加鲜明。',formula:'波本威士忌 45 ml、柠檬汁 25 ml、糖浆 20 ml；可加入少量蛋白，摇出绵密泡沫。',story:'威士忌酸属于经典的 Sour 酸酒家族，以烈酒、柑橘与糖搭建平衡。十九世纪的调酒文献中已能见到这类配方。蛋白是常见的可选做法，赋予它柔滑的口感和细致的泡沫；这里的形象展示的是带泡沫的版本。'},
+{id:'pina-colada',name:'椰林飘香',english:'Piña Colada',base:'白朗姆',seasoning:'菠萝汁\n椰浆',abv:'≈ 12%',pairing:'椰香炸虾 · 烤菠萝\n热带果香与酥脆海鲜彼此呼应。',formula:'白朗姆 50 ml、椰浆 30 ml、菠萝汁 50 ml，加冰搅打至细腻。',story:'椰林飘香与波多黎各紧密相连。关于它的现代版本，存在不同的创制主张，但白朗姆、菠萝与椰子的组合已成为热带鸡尾酒的代表。搅打后的细冰与椰香带来绵密口感，饱满的飓风杯则延续了它的度假气息。'}
+];
+
+// Measure the cup itself; garnishes never affect its displayed height.
+function measureGlassProfile({profile,rimRadius,lipY}){
+ const points=profile.map(p=>[...p]);
+ for(let i=0;i<12;i++){const a=i*Math.PI/6;points.push([rimRadius+.014*Math.cos(a),lipY+.014*Math.sin(a)])}
+ const minY=Math.min(...points.map(p=>p[1])),maxY=Math.max(...points.map(p=>p[1]));
+ return {profile:points,center:{x:0,y:(minY+maxY)/2,z:0},height:maxY-minY};
+}
+function carouselPose(bounds,angle,{cameraY=2.1,cameraZ=11,fov=35,step=Math.PI/5}={}){
+ const distance=Math.hypot(cameraY,cameraZ),sinTilt=cameraY/distance,cosTilt=cameraZ/distance,tan=Math.tan(fov*Math.PI/360);
+ const slotX=Math.sin(angle)*4.4,slotZ=Math.cos(angle)*3.3-3.3,slotY=slotZ*sinTilt/cosTilt;
+ const depthCenter=distance-sinTilt*slotY-cosTilt*slotZ;
+ const away=Math.acos(Math.max(-1,Math.min(1,Math.cos(angle))));
+ const w=Math.max(0,1-away/step),focus=w*w*(3-2*w),desiredHeight=1+.16*focus;
+ let verticalOffset=0;
+ function extents(scale){
+  let min=Infinity,max=-Infinity;
+  // A round cup's vertical extrema lie on the near/far side of each profile ring.
+  for(const [radius,height]of bounds.profile)for(const side of [-1,1]){
+   const y=(height-bounds.center.y)*scale+slotY+cosTilt*verticalOffset;
+   const z=side*radius*scale+slotZ-sinTilt*verticalOffset;
+   const depth=distance-sinTilt*y-cosTilt*z;
+   if(depth<=.1)return {min:-Infinity,max:Infinity};
+   const py=(cosTilt*y-sinTilt*z)/(depth*tan);min=Math.min(min,py);max=Math.max(max,py);
+  }
+  return {min,max};
+ }
+ let scale=1;
+ for(let pass=0;pass<4;pass++){
+  let lo=0,hi=20/Math.max(.01,bounds.height)*depthCenter/distance;
+  for(let i=0;i<15;i++){const mid=(lo+hi)/2,e=extents(mid);if(e.max-e.min>desiredHeight)hi=mid;else lo=mid}
+  scale=(lo+hi)/2;
+  const e=extents(scale);verticalOffset-=(e.min+e.max)*.5*depthCenter*tan;
+ }
+ const e=extents(scale);
+ return {scale,yaw:-angle*.35,focus,visible:Math.cos(angle)>-.65,
+  x:slotX,y:slotY+cosTilt*verticalOffset-bounds.center.y*scale,z:slotZ-sinTilt*verticalOffset,
+  projectedHeight:e.max-e.min,projectedTop:e.max,projectedBottom:e.min};
+}
+
+const drinks=[['玛格丽特','Margarita','#efd678','coupe','龙舌兰 · 橙味利口酒 · 青柠','清亮酸香 / 盐边'],['莫吉托','Mojito','#cbdc93','tall','白朗姆 · 青柠 · 薄荷 · 苏打','清爽草本 / 碎冰'],['尼格罗尼','Negroni','#ba3d24','rocks','金酒 · 金巴利 · 甜味美思','浓郁苦甜 / 橙香'],['古典','Old Fashioned','#bb7830','rocks','威士忌 · 糖 · 芳香苦精','醇厚木香 / 橙皮'],['干马天尼','Dry Martini','#ede4bd','cone','金酒 · 干味美思','干爽优雅 / 橄榄'],['代基里','Daiquiri','#e6dfa2','coupe','白朗姆 · 青柠汁 · 糖','轻盈酸甜 / 柑橘'],['曼哈顿','Manhattan','#8f3829','cone','黑麦威士忌 · 甜味美思 · 苦精','温润馥郁 / 樱桃'],['大都会','Cosmopolitan','#e4738d','cone','柑橘伏特加 · 橙酒 · 蔓越莓 · 青柠','粉红果香 / 酸甜'],['威士忌酸','Whiskey Sour','#dca953','rocks','波本威士忌 · 柠檬 · 糖','柔和酸香 / 柠檬'],['椰林飘香','Piña Colada','#f1e5b1','tall','白朗姆 · 椰奶 · 菠萝汁','热带椰香 / 绵密']];
+const css=document.createElement('style');css.textContent=`#lobby{position:fixed;inset:0;z-index:10;overflow:auto;background:radial-gradient(ellipse at 55% 43%,#eaa9bd,#f7e8dc 69%);color:#731e3d}#lobby .inside{max-width:650px;margin:auto;min-height:100svh;position:relative;text-align:center;padding:30px 22px 28px}#lobby header{display:flex;justify-content:space-between;align-items:center;text-align:left}#lobby header b{font-size:28px;font-weight:400;letter-spacing:7px}#lobby header span{font-size:9px;letter-spacing:2px}#lobby h2{font-size:34px;font-weight:400;margin:24px 0 5px}#lobby p{font-size:12px;letter-spacing:2px;line-height:1.8}#gallery{position:relative;overflow:hidden;isolation:isolate;height:48svh;min-height:310px;max-height:510px;touch-action:pan-y;cursor:grab;user-select:none}#gallery:active{cursor:grabbing}#gallery canvas{display:block;width:100%;height:100%}.selector{display:flex;justify-content:center;align-items:center}.selector button,#enter{border:1px solid #ab7384;background:#fff2e65c;color:inherit;padding:12px 19px;font:16px Georgia}.selector h3{font-size:29px;font-weight:400;margin:0}.selector small{display:block;letter-spacing:3px;font-size:10px;margin-top:7px}#enter{background:#812d50;color:#fff0e3;border-radius:30px;width:90%;margin:18px auto 8px;padding:16px}#dots{display:flex;justify-content:center;gap:8px;margin:15px}#dots button{padding:0;width:6px;height:6px;border:0;border-radius:50%;background:#731e3d40}#dots button.active{background:#731e3d;transform:scale(1.4)}#backLobby{border:0;background:none;color:inherit;font:14px Georgia;padding:12px;cursor:pointer}#lobby footer{font-size:9px;letter-spacing:3px;margin-top:20px}#detailExtra{position:fixed;inset:0;z-index:12;background:#f7e8dc;overflow:auto}#detailExtra .inside{max-width:500px;margin:auto;padding:28px}#detailExtra h2{font-size:42px;font-weight:400}#detailExtra p{line-height:2}#detailExtra img{width:100%}`;document.head.append(css);
+const lobby=document.createElement('div');lobby.id='lobby';lobby.innerHTML=`<div class="inside"><header><b>寻味</b><span>A TASTE TO REMEMBER<br>COCKTAIL COLLECTION / 10</span></header><h2>今夜，寻一杯心动</h2><p>滑动旋转酒单 · 点击探索风味</p><div id="gallery" role="region" aria-label="旋转鸡尾酒展示"></div><div class="selector"><div><h3 id="drinkName"></h3><small id="drinkEnglish"></small></div></div><div id="dots"></div><p id="flavor"></p><button id="enter">探索这杯酒</button></div>`;document.body.append(lobby);
+const gallery=document.querySelector('#gallery'),scene2=new THREE.Scene(),cam2=new THREE.PerspectiveCamera(35,1,.1,100);cam2.position.set(0,2.1,11);cam2.lookAt(0,0,0);const rr=new THREE.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true,powerPreference:'high-performance'});rr.setPixelRatio(Math.min(devicePixelRatio,2));gallery.append(rr.domElement);scene2.add(new THREE.HemisphereLight(0xfff9ed,0x9b6275,1.7));for(const x of [-4,4]){const l=new THREE.PointLight(0xffffff,38);l.position.set(x,5,5);scene2.add(l)}
+studioEnvironment(rr,scene2);rr.toneMapping=THREE.ACESFilmicToneMapping;rr.toneMappingExposure=1.05;
+const ring=new THREE.Group();scene2.add(ring);const models=[];
+for(let i=0;i<10;i++){const g=cocktailModel(i);models.push(g);ring.add(g);g.userData.carouselBounds=measureGlassProfile(g.userData.glassProfile)}
+const step=Math.PI/5,wrap=i=>((i%10)+10)%10;let selected=0,target=0,rotation=0,dragging=false,pointerId=null,startX=0,lastX=0,lastTime=0,velocity=0,moved=0,mode='snap',axis=null,startY=0;
+const dots=document.querySelector('#dots');drinks.forEach((d,i)=>{const b=document.createElement('button');b.ariaLabel=d[0];b.onclick=()=>choose(i);dots.append(b)});
+function updateSelection(){const i=wrap(Math.round(-rotation/step));if(i===selected&&document.querySelector('#drinkName').textContent)return;selected=i;const d=drinks[i];document.querySelector('#drinkName').textContent=d[0];document.querySelector('#drinkEnglish').textContent=d[1].toUpperCase();document.querySelector('#flavor').textContent=d[5];[...dots.children].forEach((b,j)=>{b.classList.toggle('active',j===i);b.setAttribute('aria-pressed',String(j===i))})}
+function choose(i){const desired=-wrap(i)*step;target=rotation+Math.atan2(Math.sin(desired-rotation),Math.cos(desired-rotation));mode='snap';velocity=0}
+updateSelection();
+gallery.tabIndex=0;gallery.onkeydown=e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();choose(selected+(e.key==='ArrowRight'?1:-1))}if(e.key==='Enter')enter()};
+gallery.onpointerdown=e=>{if(!e.isPrimary||e.button!==0)return;pointerId=e.pointerId;dragging=true;axis=null;startX=lastX=e.clientX;startY=e.clientY;lastTime=e.timeStamp;velocity=0;moved=0;mode='drag';gallery.setPointerCapture(e.pointerId)};
+gallery.onpointermove=e=>{if(!dragging||e.pointerId!==pointerId)return;const totalX=e.clientX-startX,totalY=e.clientY-startY;if(!axis&&Math.hypot(totalX,totalY)>6)axis=Math.abs(totalX)>Math.abs(totalY)?'x':'y';if(axis==='y')return;if(axis!=='x')return;const delta=e.clientX-lastX,dt=Math.max(1,e.timeStamp-lastTime),sensitivity=step/(gallery.clientWidth*.44);rotation+=delta*sensitivity;velocity=velocity*.45+(delta*sensitivity/dt)*.55;moved=Math.max(moved,Math.abs(totalX));lastX=e.clientX;lastTime=e.timeStamp;updateSelection()};
+function finishDrag(e,cancelled=false){if(!dragging||e.pointerId!==pointerId)return;dragging=false;if(gallery.hasPointerCapture(e.pointerId))gallery.releasePointerCapture(e.pointerId);if(e.timeStamp-lastTime>100)velocity=0;velocity=Math.max(-.006,Math.min(.006,velocity));if(cancelled||axis==='y'){velocity=0;target=Math.round(rotation/step)*step;mode='snap'}else if(moved<7&&!axis){target=Math.round(rotation/step)*step;mode='snap';if(Math.abs(target-rotation)<.055)enter()}else{mode='coast';target=Math.round(rotation/step)*step}pointerId=null}
+gallery.onpointerup=e=>finishDrag(e);gallery.onpointercancel=e=>finishDrag(e,true);gallery.onlostpointercapture=e=>{if(dragging)finishDrag(e,true)};
+const stage=document.querySelector('#stage'),main=document.querySelector('main');
+const margaritaDetail=models[0];margaritaDetail.visible=false;
+function detailModel(){return detailIndex===0?margaritaDetail:models[detailIndex]}
+const AUTO_ROTATE_RADIANS_PER_SECOND=.16;
+let detailIndex=0,detailAngle=0,detailVelocity=0,detailDrag=false,detailPointer=null,detailX=0,detailTime=0;
+rr.domElement.style.position='absolute';rr.domElement.style.inset='0';rr.domElement.style.touchAction='pan-y';
+function fitDetailGlass(){
+ const current=detailModel();current.rotation.set(0,0,0);current.position.set(0,0,0);current.scale.setScalar(1);current.updateMatrixWorld(true);
+ const bounds=new THREE.Box3().setFromObject(current),size=bounds.getSize(new THREE.Vector3()),center=bounds.getCenter(new THREE.Vector3());
+ const visibleHeight=2*Math.hypot(cam2.position.y,cam2.position.z)*Math.tan(cam2.fov*Math.PI/360),visibleWidth=visibleHeight*cam2.aspect;
+ const scale=Math.min(visibleHeight*.94/size.y,visibleWidth*.94/size.x);
+ current.scale.setScalar(scale);current.position.set(-center.x*scale,-center.y*scale,0);current.rotation.y=detailAngle;return {bounds,scale};
+}
+function renderSize(){
+ const container=lobby.hidden?stage:gallery,w=container.clientWidth;
+ if(!w)return;
+ cam2.clearViewOffset();
+ if(!lobby.hidden){const h=gallery.clientHeight;if(!h)return;rr.setSize(w,h);cam2.aspect=w/h;cam2.updateProjectionMatrix();return}
+ // Keep the same glass size, but extend the camera window beyond the old lower edge.
+ const baseHeight=parseFloat(getComputedStyle(stage).height);
+ if(!baseHeight)return;
+ cam2.aspect=w/baseHeight;cam2.updateProjectionMatrix();cam2.updateMatrixWorld(true);
+ const current=detailModel(),{bounds,scale}=fitDetailGlass(),axis=new THREE.Vector3(0,1,0);
+ let minPixelY=Infinity,maxPixelY=-Infinity;
+ // Project a conservative model envelope through a complete turn, including the base.
+ for(let turn=0;turn<48;turn++)for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z]){
+  const projected=new THREE.Vector3(x,y,z).applyAxisAngle(axis,turn*Math.PI/24).multiplyScalar(scale).add(current.position).project(cam2);
+  const pixelY=(1-projected.y)*baseHeight/2;
+  minPixelY=Math.min(minPixelY,pixelY);maxPixelY=Math.max(maxPixelY,pixelY);
+ }
+ const top=Math.floor(Math.min(-16,minPixelY-16)),bottom=Math.ceil(Math.max(baseHeight+100,maxPixelY+16)),height=bottom-top;
+ const padding=height-baseHeight;
+ if(stage.style.paddingBottom!==padding+'px')stage.style.paddingBottom=padding+'px';
+ rr.setSize(w,height);cam2.setViewOffset(w,baseHeight,0,top,w,height);cam2.updateProjectionMatrix();
+}
+function writeURL(id,replace=false){const url=new URL(location.href);url.hash='';if(id)url.searchParams.set('drink',id);else url.searchParams.delete('drink');try{history[replace?'replaceState':'pushState']({drink:id},'',url)}catch{location.hash=id||'home'}}
+function showHome(){document.querySelector('#modal').close();detailDrag=false;lobby.hidden=false;main.inert=true;main.setAttribute('aria-hidden','true');stage.dataset.drink='home';gallery.append(rr.domElement);margaritaDetail.visible=false;cam2.fov=35;cam2.position.set(0,2.1,11);cam2.lookAt(0,0,0);document.title='寻味 · 经典鸡尾酒';renderSize()}
+function home(){writeURL(null);showHome();window.scrollTo(0,0)}
+function openDrink(index){detailIndex=index;const d=drinkPages[index];document.querySelector('#modal').close();lobby.hidden=true;main.inert=false;main.removeAttribute('aria-hidden');stage.dataset.drink=d.id;document.title='寻味 · '+d.name;
+ document.querySelector('hgroup h1').textContent=d.name;document.querySelector('hgroup p').textContent=d.english.toUpperCase();document.querySelector('hgroup h1').style.fontSize=d.name.length>4?'clamp(30px,8vw,48px)':'';
+ const recipe=document.querySelector('.recipe');recipe.replaceChildren();for(const [label,value]of [['基酒',d.base],['调味',d.seasoning],['酒精度',d.abv+' vol']]){const b=document.createElement('b');b.textContent=label;recipe.append(b,document.createTextNode(value))}const note=document.createElement('small');note.textContent='估算值，依配方与稀释变化';recipe.append(document.createElement('br'),note);
+ document.querySelector('.details p').textContent=d.pairing;document.querySelector('.details p').style.whiteSpace='pre-line';stage.setAttribute('aria-label','拖动旋转'+d.name+'的三维酒杯');detailAngle=0;detailVelocity=0;detailDrag=false;
+ stage.append(rr.domElement);cam2.fov=7.5;cam2.position.set(0,12,45);cam2.lookAt(0,0,0);models.forEach(g=>g.visible=false);margaritaDetail.visible=false;
+ const current=detailModel();current.visible=true;current.position.set(.05,.1,0);current.rotation.set(0,0,0);current.scale.setScalar(index===0?1:1.35);
+ renderSize();window.scrollTo(0,0)
+}
+function enter(){writeURL(drinkPages[selected].id);openDrink(selected)}
+function route(){let id=location.hash==='#home'?null:new URL(location.href).searchParams.get('drink');if(location.hash&&location.hash!=='#home')id=decodeURIComponent(location.hash.slice(1));if(id==='piña-colada')id='pina-colada';const index=drinkPages.findIndex(d=>d.id===id);if(index<0){showHome();return}selected=index;rotation=target=-index*step;mode='snap';velocity=0;updateSelection();openDrink(index)}
+function showDialog(title,content){document.querySelector('#title').textContent=title;document.querySelector('#content').textContent=content;document.querySelector('#modal').showModal()}
+ document.querySelector('#close').onclick=()=>document.querySelector('#modal').close();
+ document.querySelector('#history').onclick=()=>{const d=drinkPages[detailIndex];showDialog(d.name+' · 酒的历史',d.story+'\n\n经典配方：'+d.formula)};
+ document.querySelector('#order').onclick=()=>showDialog('已选择 · '+drinkPages[detailIndex].name,'这杯风味已为你选好。');
+ document.querySelector('.home').onclick=home;document.querySelector('.home').setAttribute('aria-label','返回旋转酒单主页');document.querySelector('#enter').onclick=enter;
+ rr.domElement.onpointerdown=e=>{if(!lobby.hidden||!e.isPrimary||e.button!==0)return;e.stopPropagation();detailDrag=true;detailPointer=e.pointerId;detailX=e.clientX;detailTime=e.timeStamp;detailVelocity=0;rr.domElement.setPointerCapture(e.pointerId)};
+ rr.domElement.onpointermove=e=>{if(!detailDrag||e.pointerId!==detailPointer)return;e.stopPropagation();const delta=(e.clientX-detailX)*.009;detailAngle+=delta;detailVelocity=detailVelocity*.4+(delta/Math.max(1,e.timeStamp-detailTime))*.6;detailX=e.clientX;detailTime=e.timeStamp};
+ function endDetail(e){if(e.pointerId!==detailPointer)return;e.stopPropagation();detailDrag=false;if(e.timeStamp-detailTime>100)detailVelocity=0;if(rr.domElement.hasPointerCapture(e.pointerId))rr.domElement.releasePointerCapture(e.pointerId);detailPointer=null}
+ rr.domElement.onpointerup=endDetail;rr.domElement.onlostpointercapture=endDetail;rr.domElement.onpointercancel=e=>{detailVelocity=0;endDetail(e)};rr.domElement.tabIndex=0;rr.domElement.setAttribute('aria-label','左右拖动旋转酒杯');rr.domElement.onkeydown=e=>{if(lobby.hidden&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();detailAngle+=e.key==='ArrowLeft'?-.15:.15}};
+ window.addEventListener('popstate',route);window.addEventListener('hashchange',route);
+ route();
+const viewObserver=new ResizeObserver(renderSize);viewObserver.observe(gallery);viewObserver.observe(stage);let previousFrame=0;rr.setAnimationLoop(now=>{const dt=previousFrame?Math.min(40,now-previousFrame):16.67;previousFrame=now;if(lobby.hidden){if(!detailDrag){detailAngle+=(detailVelocity+AUTO_ROTATE_RADIANS_PER_SECOND/1000)*dt;detailVelocity*=Math.exp(-dt/180)}detailModel().rotation.y=detailAngle;rr.render(scene2,cam2);return;}if(!dragging){if(mode==='coast'){rotation+=velocity*dt;velocity*=Math.exp(-dt/190);if(Math.abs(velocity)<.00022){target=Math.round(rotation/step)*step;mode='snap'}}else{rotation+=(target-rotation)*(1-Math.exp(-dt/100));if(Math.abs(target-rotation)<.0001)rotation=target}}updateSelection();models.forEach((g,i)=>{const pose=carouselPose(g.userData.carouselBounds,i*step+rotation);g.position.set(pose.x,pose.y,pose.z);g.rotation.set(0,pose.yaw,0);g.scale.setScalar(pose.scale);g.visible=pose.visible});rr.render(scene2,cam2)});
+</script></body></html>
